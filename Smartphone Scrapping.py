@@ -1,35 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 #Importing required libraries
-
-
-# In[2]:
-
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 
-
-# In[3]:
-
-
 # Function to extract content from page
-
-
-# In[4]:
-
-
-driver = webdriver.Edge()
-
-
-# In[5]:
-
 
 def url_content(url):
     driver.get(url)
@@ -37,15 +13,10 @@ def url_content(url):
     soup = BeautifulSoup(page_content, 'html.parser')
     return soup
 
-
-# In[6]:
-
-
-#Function to extract urls of products 
+driver = webdriver.Edge()
 
 
-# In[7]:
-
+#Function to extract urls of products
 
 def get_product_url(soup):
     page_content = driver.page_source
@@ -58,14 +29,7 @@ def get_product_url(soup):
     return product_link
 
 
-# In[8]:
-
-
 #Function to extract names of products 
-
-
-# In[9]:
-
 
 def get_product_name(soup):
     product_name= []
@@ -78,14 +42,7 @@ def get_product_name(soup):
     return product_name
 
 
-# In[10]:
-
-
-#Function to extract price of products 
-
-
-# In[11]:
-
+#Function to extract price of products
 
 def get_product_price(soup):
     product_price = []
@@ -98,14 +55,7 @@ def get_product_price(soup):
     return product_price
 
 
-# In[12]:
-
-
 #Function to extract ratings of products 
-
-
-# In[13]:
-
 
 def get_product_ratings(soup):
     product_ratings = []
@@ -118,14 +68,7 @@ def get_product_ratings(soup):
     return product_ratings
 
 
-# In[14]:
-
-
 #Function to extract ram_size of products 
-
-
-# In[15]:
-
 
 def get_ram_size(soup):
     specifications=[]
@@ -138,15 +81,7 @@ def get_ram_size(soup):
         ram_size = "No rating available"
     return ram_size
 
-
-# In[16]:
-
-
 #Function to extract display of products 
-
-
-# In[17]:
-
 
 def get_resolution(soup):
     specifications=[]
@@ -159,15 +94,7 @@ def get_resolution(soup):
         resolution = "NO value available"
     return resolution
 
-
-# In[18]:
-
-
 #Function to extract camera details of products 
-
-
-# In[19]:
-
 
 def get_camera_details(soup):
     specifications=[]
@@ -180,15 +107,7 @@ def get_camera_details(soup):
         camera_details= "NO value available"
     return camera_details
 
-
-# In[20]:
-
-
 #Function to extract processor of products 
-
-
-# In[21]:
-
 
 def get_processor(soup):
     specifications=[]
@@ -201,15 +120,7 @@ def get_processor(soup):
         processor = "NO value available"
     return processor
 
-
-# In[22]:
-
-
 #Function to extract warranty of products 
-
-
-# In[23]:
-
 
 def get_warranty(soup):
     specifications=[]
@@ -222,65 +133,31 @@ def get_warranty(soup):
         warranty = "NO value available"
     return warranty
 
-
-# In[24]:
-
-
 #website_link
 
-
-# In[25]:
-
-
 url = "https://www.flipkart.com/search?q=smart%20pjone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
-
-
-# In[26]:
 
 
 #Creating dataframe for calculating the length of the dataframe containing the features
 
 
-# In[27]:
-
-
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "ram_size":[],"resolution":[],"camera":[],"processor":[],"warranty":[]})
-
-
-# In[28]:
 
 
 url_contents=url_content(url)
 
 
-# In[29]:
-
-
 #Getting Each product's link
 
-
-# In[30]:
-
-
 product_links=get_product_url(url_contents)
-
-
-
-# In[31]:
 
 
 #Assigning the each product's link to the variaable "Product_Url" in the dataframe
 
 
-# In[32]:
-
-
 data["Product_Url"] = product_links
 
-
-
-# In[38]:
-
+#Scraping all the required features of each product
 
 df = pd.DataFrame()
 for page in range(1, 45):
@@ -306,10 +183,6 @@ for page in range(1, 45):
         
         return df
 
-
-# In[39]:
-
-
 for product in range(len(data)):
        product_url = data["Product_Url"].iloc[product]
        product_content = url_content(product_url)
@@ -317,21 +190,11 @@ for product in range(len(data)):
        df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 df.head()
 
-
-# In[40]:
-
-
 #Converting the dataframe into a json file
-
-
-
-# In[41]:
-
 
 smart_phone_json = df.to_json(orient='records')
 
 
-# In[ ]:
 
 
 
