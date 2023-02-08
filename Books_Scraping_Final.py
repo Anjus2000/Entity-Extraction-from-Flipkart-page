@@ -108,8 +108,12 @@ for product in range(len(data)):
     df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 
 
-# In[ ]:
+# In[13 ]:
+df.head()
 
+#Converting the dataframe into a json file
+
+smart_tv_json = df.to_json(orient='records')
 
 
 
