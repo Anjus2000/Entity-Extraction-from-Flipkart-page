@@ -1,33 +1,20 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
+#Importing necessary libraries
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 
-
-# In[3]:
-
-
 driver = webdriver.Chrome()
 
-
-# In[4]:
-
+#Function to extract content from page
 
 def url_content(url):
     driver.get(url)
     page_content = driver.page_source
     soup = BeautifulSoup(page_content, 'html.parser')
     return soup
-
-
-# In[5]:
-
+#Function for product url
 
 def get_product_url(soup):
     page_content = driver.page_source
@@ -39,9 +26,7 @@ def get_product_url(soup):
         product_link.append(start_link+rest_link)
     return product_link
 
-
-# In[6]:
-
+#Function for getting product name 
 
 def get_product_name(soup):
     product_name= []
@@ -53,9 +38,7 @@ def get_product_name(soup):
         product_name.append(name)
     return product_name
 
-
-# In[7]:
-
+#Function for getting product price
 
 def get_product_price(soup):
     product_price = []
@@ -67,9 +50,7 @@ def get_product_price(soup):
         product_price.append(price)
     return product_price
 
-
-# In[8]:
-
+#Function for getting ratings 
 
 def get_product_ratings(soup):
     product_ratings = []
@@ -79,11 +60,9 @@ def get_product_ratings(soup):
     except:
         ratings = "No rating available"
         product_ratings.append(ratings)
-    return product_ratings    
+    return product_ratings
 
-
-# In[9]:
-
+#Function for getting specifications
 
 def get_specifications(soup):
     for item in soup.find_all("li", class_="_21Ahn-"):
@@ -98,14 +77,11 @@ def get_specifications(soup):
     return ( Language,Binding,Publisher,Pages)
 
 
-# In[10]:
-
+#Link of the product
 
 url="https://www.flipkart.com/meditations/p/itmfbcm9fphnqzdp?pid=9789387585157&lid=LSTBOK9789387585157JS7VG1&marketplace=FLIPKART&q=books+to+read&store=bks&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=c5a24269-2f35-40f0-b435-a94132a86e61.9789387585157.SEARCH&ppt=hp&ppn=homepage&ssid=mtcgs6cwkg0000001675849584049&qH=5e6d38a562c8230c"
 
-
-# In[11]:
-
+#
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : []}) 
 
