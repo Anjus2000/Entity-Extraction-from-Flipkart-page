@@ -1,14 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#Importing required libraries
-
-
-# In[ ]:
-
 
 import requests
 from bs4 import BeautifulSoup
@@ -16,19 +5,11 @@ import pandas as pd
 from selenium import webdriver
 
 
-# In[ ]:
-
 
 # Function to extract content from page
 
 
-# In[ ]:
-
-
 driver = webdriver.Edge()
-
-
-# In[ ]:
 
 
 def url_content(url):
@@ -38,13 +19,8 @@ def url_content(url):
     return soup
 
 
-# In[ ]:
-
 
 #Function to extract urls of products 
-
-
-# In[ ]:
 
 
 def get_product_url(soup):
@@ -58,13 +34,9 @@ def get_product_url(soup):
     return product_link
 
 
-# In[ ]:
-
 
 #Function to extract names of products 
 
-
-# In[ ]:
 
 
 def get_product_name(soup):
@@ -79,13 +51,8 @@ def get_product_name(soup):
 
 
 
-# In[ ]:
-
-
 #Function to extract price of products 
 
-
-# In[ ]:
 
 
 def get_product_price(soup):
@@ -99,13 +66,9 @@ def get_product_price(soup):
     return product_price
 
 
-# In[ ]:
-
 
 #Function to extract ratings of products 
 
-
-# In[ ]:
 
 
 def get_product_ratings(soup):
@@ -119,13 +82,9 @@ def get_product_ratings(soup):
     return product_ratings
 
 
-# In[ ]:
-
 
 #Function to extract ram_size of products 
 
-
-# In[ ]:
 
 
 def get_ram_size(soup):
@@ -140,13 +99,9 @@ def get_ram_size(soup):
     return ram_size
 
 
-# In[ ]:
-
 
 #Function to extract display of products 
 
-
-# In[ ]:
 
 
 def get_resolution(soup):
@@ -161,13 +116,9 @@ def get_resolution(soup):
     return resolution
 
 
-# In[ ]:
-
 
 #Function to extract camera details of products 
 
-
-# In[ ]:
 
 
 def get_camera_details(soup):
@@ -182,13 +133,10 @@ def get_camera_details(soup):
     return camera_details
 
 
-# In[ ]:
-
 
 #Function to extract processor of products 
 
 
-# In[ ]:
 
 
 def get_battery_details(soup):
@@ -203,13 +151,9 @@ def get_battery_details(soup):
     return battery_details
 
 
-# In[ ]:
-
 
 #Function to extract warranty of products 
 
-
-# In[ ]:
 
 
 def get_processor(soup):
@@ -224,67 +168,38 @@ def get_processor(soup):
     return processor
 
 
-# In[ ]:
-
 
 #website_link
 
-
-# In[ ]:
 
 
 url = "https://www.flipkart.com/search?q=smartphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
 
 
-# In[ ]:
-
 
 #Creating dataframe for calculating the length of the dataframe containing the features
 
-
-# In[ ]:
 
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "ram_size":[],"resolution":[],"camera_details":[],"battery_details":[],"Processor":[]})
 
 
-# In[ ]:
-
 
 url_contents=url_content(url)
 
-
-# In[ ]:
 
 
 #Getting Each product's link
 
 
-# In[ ]:
-
-
 product_links=get_product_url(url_contents)
-
-
-
-
-
-
-
-# In[ ]:
 
 
 #Assigning the each product's link to the variaable "Product_Url" in the dataframe
 
 
-# In[ ]:
-
 
 data["Product_Url"] = product_links
-
-
-
-# In[ ]:
 
 
 df = pd.DataFrame()
@@ -312,8 +227,6 @@ for page in range(1, 45):
         return df
 
 
-# In[ ]:
-
 
 for product in range(len(data)): 
        product_url = data["Product_Url"].iloc[product]
@@ -323,14 +236,8 @@ for product in range(len(data)):
 df.head(15)
 
 
-# In[ ]:
-
 
 #Converting the dataframe into a json file
-
-
-
-# In[ ]:
 
 
 smart_phone_json = df.to_json(orient='records')
