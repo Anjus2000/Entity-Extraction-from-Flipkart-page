@@ -1,14 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#Importing required libraries
-
-
-# In[3]:
-
 
 import requests
 from bs4 import BeautifulSoup
@@ -16,19 +5,10 @@ import pandas as pd
 from selenium import webdriver
 
 
-# In[4]:
-
-
 # Function to extract content from page
 
 
-# In[5]:
-
-
 driver = webdriver.Edge()
-
-
-# In[6]:
 
 
 def url_content(url):
@@ -38,13 +18,7 @@ def url_content(url):
     return soup
 
 
-# In[7]:
-
-
 #Function to extract urls of products 
-
-
-# In[8]:
 
 
 def get_product_url(soup):
@@ -58,13 +32,7 @@ def get_product_url(soup):
     return product_link
 
 
-# In[9]:
-
-
 #Function to extract names of products 
-
-
-# In[10]:
 
 
 def get_product_name(soup):
@@ -79,13 +47,7 @@ def get_product_name(soup):
 
 
 
-# In[11]:
-
-
 #Function to extract price of products 
-
-
-# In[12]:
 
 
 def get_product_price(soup):
@@ -99,13 +61,7 @@ def get_product_price(soup):
     return product_price
 
 
-# In[13]:
-
-
 #Function to extract ratings of products 
-
-
-# In[14]:
 
 
 def get_product_ratings(soup):
@@ -119,13 +75,7 @@ def get_product_ratings(soup):
     return product_ratings
 
 
-# In[15]:
-
-
 #Function to extract ram_size of products 
-
-
-# In[16]:
 
 
 def get_processor(soup):
@@ -140,13 +90,8 @@ def get_processor(soup):
     return processor
 
 
-# In[17]:
-
-
 #Function to extract display of products 
 
-
-# In[18]:
 
 
 def get_ram_size(soup):
@@ -161,13 +106,7 @@ def get_ram_size(soup):
     return ram_size
 
 
-# In[19]:
-
-
 #Function to extract camera details of products 
-
-
-# In[20]:
 
 
 def get_operating_system(soup):
@@ -182,13 +121,7 @@ def get_operating_system(soup):
     return operating_system
 
 
-# In[21]:
-
-
 #Function to extract processor of products 
-
-
-# In[22]:
 
 
 def get_storage(soup):
@@ -203,13 +136,7 @@ def get_storage(soup):
     return storage
 
 
-# In[23]:
-
-
 #Function to extract warranty of products 
-
-
-# In[24]:
 
 
 def get_resolution(soup):
@@ -224,9 +151,6 @@ def get_resolution(soup):
     return resolution
 
 
-# In[25]:
-
-
 def get_warranty(soup):
     specifications=[]
     for item in soup.find_all("div", class_="_2418kt"):
@@ -239,43 +163,22 @@ def get_warranty(soup):
     return warranty
 
 
-# In[26]:
-
-
 #website_link
-
-
-# In[27]:
 
 
 url = "https://www.flipkart.com/search?q=laptops&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
 
 
-# In[28]:
-
-
 #Creating dataframe for calculating the length of the dataframe containing the features
-
-
-# In[29]:
 
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "processor":[],"ram_size":[],"operating_system":[],"storage":[],"resolution":[],"warranty":[]})
 
 
-# In[30]:
-
-
 url_contents=url_content(url)
 
 
-# In[31]:
-
-
 #Getting Each product's link
-
-
-# In[32]:
 
 
 product_links=get_product_url(url_contents)
@@ -283,23 +186,9 @@ product_links=get_product_url(url_contents)
 
 
 
-
-
-
-# In[33]:
-
-
 #Assigning the each product's link to the variaable "Product_Url" in the dataframe
 
-
-# In[34]:
-
-
 data["Product_Url"] = product_links
-
-
-
-# In[37]:
 
 
 df = pd.DataFrame()
@@ -329,9 +218,6 @@ for page in range(1, 45):
         return df
 
 
-# In[38]:
-
-
 for product in range(len(data)): 
        product_url = data["Product_Url"].iloc[product]
        product_content = url_content(product_url)
@@ -340,14 +226,8 @@ for product in range(len(data)):
 df.head(15)
 
 
-# In[ ]:
-
 
 #Converting the dataframe into a json file
-
-
-
-# In[ ]:
 
 
 smart_phone_json = df.to_json(orient='records')
