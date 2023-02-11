@@ -86,8 +86,6 @@ url="https://www.flipkart.com/meditations/p/itmfbcm9fphnqzdp?pid=9789387585157&l
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : []}) 
 
 
-# In[12]:
-
 
 df = pd.DataFrame()
 def assign_to_dataframe(product_content):
@@ -108,7 +106,6 @@ for product in range(len(data)):
     df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 
 
-# In[13 ]:
 df.head()
 
 #Converting the dataframe into a json file
@@ -118,7 +115,7 @@ smart_tv_json = df.to_json(orient='records')
 
 
 
-# In[ ]:
+
 
 
 
