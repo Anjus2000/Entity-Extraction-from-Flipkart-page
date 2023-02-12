@@ -16,19 +16,10 @@ import pandas as pd
 from selenium import webdriver
 
 
-# In[3]:
-
-
 # Function to extract content from page
 
 
-# In[4]:
-
-
 driver = webdriver.Edge()
-
-
-# In[5]:
 
 
 def url_content(url):
@@ -38,14 +29,7 @@ def url_content(url):
     return soup
 
 
-# In[6]:
-
-
 #Function to extract urls of products 
-
-
-# In[7]:
-
 
 def get_product_url(soup):
     page_content = driver.page_source
@@ -58,13 +42,7 @@ def get_product_url(soup):
     return product_link
 
 
-# In[8]:
-
-
 #Function to extract names of products 
-
-
-# In[9]:
 
 
 def get_product_name(soup):
@@ -79,13 +57,7 @@ def get_product_name(soup):
 
 
 
-# In[10]:
-
-
 #Function to extract price of products 
-
-
-# In[11]:
 
 
 def get_product_price(soup):
@@ -99,13 +71,7 @@ def get_product_price(soup):
     return product_price
 
 
-# In[12]:
-
-
 #Function to extract ratings of products 
-
-
-# In[13]:
 
 
 def get_product_ratings(soup):
@@ -119,13 +85,7 @@ def get_product_ratings(soup):
     return product_ratings
 
 
-# In[14]:
-
-
 #Function to extract capacity_in_tonsof products 
-
-
-# In[15]:
 
 
 def get_capacity_in_tons(soup):
@@ -140,13 +100,8 @@ def get_capacity_in_tons(soup):
     return capacity_in_tons
 
 
-# In[16]:
-
 
 #Function to extract star_rating of products 
-
-
-# In[17]:
 
 
 def get_star_rating(soup):
@@ -161,13 +116,7 @@ def get_star_rating(soup):
     return star_rating
 
 
-# In[18]:
-
-
 #Function to extract camera details of products 
-
-
-# In[52]:
 
 
 def get_operating_system(soup):
@@ -182,13 +131,8 @@ def get_operating_system(soup):
     return operating_system
 
 
-# In[20]:
-
 
 #Function to extract storage of products 
-
-
-# In[21]:
 
 
 def get_storage(soup):
@@ -203,13 +147,7 @@ def get_storage(soup):
     return storage
 
 
-# In[22]:
-
-
 #Function to extract resolution of products 
-
-
-# In[23]:
 
 
 def get_resolution(soup):
@@ -224,8 +162,6 @@ def get_resolution(soup):
     return resolution
 
 
-# In[24]:
-
 
 def get_warranty(soup):
     specifications=[]
@@ -239,67 +175,37 @@ def get_warranty(soup):
     return warranty
 
 
-# In[25]:
-
 
 #website_link
-
-
-# In[26]:
 
 
 url = "https://www.flipkart.com/search?q=air%20conditioner&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
 
 
-# In[27]:
-
-
 #Creating dataframe for calculating the length of the dataframe containing the features
 
-
-# In[53]:
 
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "capacity_in_tons":[],"star_rating":[],"operating_system":[],"storage":[],"resolution":[],"warranty":[]})
 
 
-# In[54]:
-
-
 url_contents=url_content(url)
 
-
-# In[55]:
 
 
 #Getting Each product's link
 
-
-# In[56]:
 
 
 product_links=get_product_url(url_contents)
 
 
 
-
-
-
-
-# In[57]:
-
-
 #Assigning the each product's link to the variaable "Product_Url" in the dataframe
-
-
-# In[58]:
 
 
 data["Product_Url"] = product_links
 
-
-
-# In[63]:
 
 
 df = pd.DataFrame()
@@ -329,9 +235,6 @@ for page in range(1, 45):
         return df
 
 
-# In[64]:
-
-
 for product in range(len(data)): 
        product_url = data["Product_Url"].iloc[product]
        product_content = url_content(product_url)
@@ -340,15 +243,7 @@ for product in range(len(data)):
 df.head(15)
 
 
-# In[ ]:
-
-
 #Converting the dataframe into a json file
 
-
-
-# In[ ]:
-
-
-smart_phone_json = df.to_json(orient='records')
+Aircontioner_json = df.to_json(orient='records')
 
