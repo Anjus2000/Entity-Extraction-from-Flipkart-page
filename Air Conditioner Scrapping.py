@@ -107,7 +107,7 @@ def get_star_rating(soup):
     return star_rating
 
 
-#Function to extract camera details of products 
+#Function to extract opearing_system of products 
 
 
 def get_operating_system(soup):
