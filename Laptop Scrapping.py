@@ -75,8 +75,7 @@ def get_product_ratings(soup):
     return product_ratings
 
 
-#Function to extract ram_size of products 
-
+#Function to extract processor of products
 
 def get_processor(soup):
     specifications=[]
@@ -90,7 +89,7 @@ def get_processor(soup):
     return processor
 
 
-#Function to extract display of products 
+#Function to extract ram_size of products 
 
 
 
@@ -106,7 +105,7 @@ def get_ram_size(soup):
     return ram_size
 
 
-#Function to extract camera details of products 
+#Function to extract operating system of products 
 
 
 def get_operating_system(soup):
@@ -121,7 +120,7 @@ def get_operating_system(soup):
     return operating_system
 
 
-#Function to extract processor of products 
+#Function to extract storage of products 
 
 
 def get_storage(soup):
@@ -136,7 +135,7 @@ def get_storage(soup):
     return storage
 
 
-#Function to extract warranty of products 
+#Function to extract resolution of products 
 
 
 def get_resolution(soup):
