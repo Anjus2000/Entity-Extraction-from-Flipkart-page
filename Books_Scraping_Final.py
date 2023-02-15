@@ -62,26 +62,82 @@ def get_product_ratings(soup):
         product_ratings.append(ratings)
     return product_ratings
 
-#Function for getting specifications
-
-def get_specifications(soup):
-    for item in soup.find_all("li", class_="_21Ahn-"):
+#function for language
+def get_Language(soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
             item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
             specifications.append(item_specifications)
-            Language = [spec[0].split(': ')[1] for spec in specifications]
-            Binding= [spec[1] for spec in specifications]
-            Publisher = [spec[2] for spec in specifications]
-            Pages = [spec[3] for spec in specifications]
-            
-           
-    return ( Language,Binding,Publisher,Pages)
+    try:
+        supported_app = [spec[0].split(': ')[1] for spec in specifications]
+    except:
+       Language = "No rating available"
+    return Language
 
+#function for binding
+def get_Binding(soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
+            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
+            specifications.append(item_specifications)
+    try:
+        Binding= [spec[2] for spec in specifications]
+    except:
+        Binding = "NO value available"
+    return Binding
+#function for publisher
+def get_Publisher(soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
+            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
+            specifications.append(item_specifications)
+    try:
+        Publisher = [spec[3] for spec in specifications]
+    except:
+        Publisher= "NO value available"
+    return Publisher
+
+#function for genre
+def get_genre(soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
+            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
+            specifications.append(item_specifications)
+    try:
+        genre= [spec[4] for spec in specifications]
+    except:
+        genre= "NO value available"
+    return genre
+
+#function for ISBN
+def get_isbn (soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
+            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
+            specifications.append(item_specifications)
+    try:
+        isbn = [spec[5] for spec in specifications]
+    except:
+        isbn= "NO value available"
+    return isbn
+
+#function for edtion
+def get_edition(soup):
+    specifications=[]
+    for item in soup.find_all("div", class_="_2418kt"):
+            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
+            specifications.append(item_specifications)
+    try:
+        edition = [spec[6] for spec in specifications]
+    except:
+        edition= "NO value available"
+    return edition
 
 #Link of the product
 
 url="https://www.flipkart.com/meditations/p/itmfbcm9fphnqzdp?pid=9789387585157&lid=LSTBOK9789387585157JS7VG1&marketplace=FLIPKART&q=books+to+read&store=bks&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=c5a24269-2f35-40f0-b435-a94132a86e61.9789387585157.SEARCH&ppt=hp&ppn=homepage&ssid=mtcgs6cwkg0000001675849584049&qH=5e6d38a562c8230c"
 
-#
+
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : []}) 
 
@@ -95,7 +151,15 @@ def assign_to_dataframe(product_content):
     df =pd.DataFrame({
            "Product Name": product_names,
             "Price": product_prices,
-            "Ratings" : product_ratings
+            "Ratings" : product_ratings'
+            "Language":language,
+            "Binding":binding,
+            "Publisher":Publisher,
+            "Genre":genre,
+            "ISBN':isbn
+            "Edition":edition
+                                                                                           
+        
         })
 
     return df
