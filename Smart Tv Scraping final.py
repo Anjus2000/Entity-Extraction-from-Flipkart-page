@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 
-driver = webdriver.Edge()
-
 #Function to extract content from page
 
 def url_content(url):
