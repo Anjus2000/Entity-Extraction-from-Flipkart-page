@@ -130,54 +130,51 @@ def get_refresh_rates(soup):
     return refresh_rate
 
 
-# Flipkart smart tv products link
-
-url = "https://www.flipkart.com/search?q=smart+tv&sid=ckf%2Cczl&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&as-pos=1&as-type=HISTORY&suggestionId=smart+tv%7CTelevisions&requestId=ac4665a8-c1ef-462b-9fb8-e5913908cc39"
-
 #Creating dataframe for calculating the length of the dataframe containing the features
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "Supported Apps" : [],"Operating Systems" : [], "Resolutions" : [], "Refresh Rates" : [], "Refresh Rates" : []})
 
-url_contents=url_content(url)
 
-#Getting Each product's link
-
-product_link = get_product_url(url_contents)
-
-#Assigning the each product's link to the variaable "Product_Url" in the dataframe
-
-data["Product_Url"] = product_link
 
 #Scraping all the required features of each product
 
-df = pd.DataFrame()
-for page in range(1, 45):
-    def assign_to_dataframe(product_content):
-        product_names = get_product_name(product_content)
-        product_prices = get_product_price(product_content)
-        product_ratings= get_product_ratings(product_content)
-        supported_appss = get_supported_apps(product_content)
-        operating_systemss = get_operating_systems(product_content)
-        resolutionss = get_resolutions(product_content)
-        sound_outputss = get_sound_outputs(product_content)
-        refresh_ratess = get_refresh_rates(product_content)
-        df =pd.DataFrame({
-               "Product Name": product_names,
-                "Price": product_prices,
-                "Ratings" : product_ratings,
-                 "Supported Apps" : supported_appss,
-                "Operating Systems" : operating_systemss,
-                "Resolutions" : resolutionss,
-                "Sound Outputs" : sound_outputss,
-                "Refresh Rates" : refresh_ratess
-            })
+df=pd.DataFrame()
+def assign_to_dataframe(product_content):
+    product_names = get_product_name(product_content)
+    product_prices = get_product_price(product_content)
+    product_ratings= get_product_ratings(product_content)
+    supported_appss = get_specifications1(product_content)
+    operating_systemss = get_specifications2(product_content)
+    resolutionss = get_specifications3(product_content)
+    sound_outputss = get_specifications4(product_content)
+    refresh_ratess = get_specifications5(product_content)
+    df = pd.DataFrame({
+                   "Product Name": product_names,
+                    "Price": product_prices,
+                    "Ratings" : product_ratings,
+                     "Supported Apps" : supported_appss,
+                    "Operating Systems" : operating_systemss,
+                    "Resolutions" : resolutionss,
+                    "Sound Outputs" : sound_outputss,
+                    "Refresh Rates" : refresh_ratess
+                })
 
-        return df
+    return df
+
+# Getting product deatails for 45 pages
+
+for page in range(1, 3):
+    url = f"https://www.flipkart.com/search?q=smart+tv&sid=ckf%2Cczl&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&as-pos=1&as-type=HISTORY&suggestionId=smart+tv%7CTelevisions&requestId=ac4665a8-c1ef-462b-9fb8-e5913908cc39"
+    url_contents = url_content(url)
+    product_link = get_product_url(url_contents)
+    data["Product_Url"] = product_link
+    
     for product in range(len(data)):
         product_url = data["Product_Url"].iloc[product]
         product_content = url_content(product_url)
         df1 = assign_to_dataframe(product_content)
         df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
+
 df.head()
 
 #Converting the dataframe into a json file
