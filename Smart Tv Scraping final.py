@@ -3,21 +3,20 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from selenium import webdriver
+
 
 #Function to extract content from page
 
 def url_content(url):
-    driver.get(url)
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'lxml')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     return soup
 
 #Function for product url
 
 def get_product_url(soup):
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'html.parser')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     product_link= []
     start_link = "https://www.flipkart.com"
     for item in soup.find_all('a',href=True, attrs={'class':'_1fQZEK'}):
@@ -35,7 +34,6 @@ def get_product_name(soup):
     except:
         name = "No product name available"
         product_name.append(name)
-    # product_name = "Product Name"
     return product_name
 
 #Function for product prices
