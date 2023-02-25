@@ -129,11 +129,75 @@ def get_refresh_rates(soup):
         refresh_rate = "NO value available"
     return refresh_rate
 
+#Function for product colour
+
+def get_product_color(soup):
+    color = ""
+    try:
+        table = soup.find("div", {"class": "_3k-BhJ"})
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "color":
+                color = cells[1].text.strip()
+                break
+    except:
+        color = "No value available"
+    return color
+
+#Function for display size 
+
+def get_display_size(soup):
+    display_size = ""
+    try:
+        table = soup.find("div", {"class": "_3k-BhJ"})
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "display size":
+                display_size = cells[1].text.strip()
+                break
+    except:
+        display_size = "No value available"
+    return display_size
+
+#function for screen type
+
+def get_screen_type(soup):
+    screen_type = ""
+    try:
+        table = soup.find("div", {"class": "_3k-BhJ"})
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "screen type":
+                screen_type = cells[1].text.strip()
+                break
+    except:
+         screen_type = "No value available"
+    return screen_type
+
+
+#Function for model name
+
+def get_model_name(soup):
+    model_name = ""
+    try:
+        table = soup.find("div", {"class": "_3k-BhJ"})
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "model name":
+                model_name = cells[1].text.strip()
+                break
+    except:
+         model_name = "No value available"
+    return model_name
+
 
 #Creating dataframe for calculating the length of the dataframe containing the features
 
-data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [], "Supported Apps" : [],"Operating Systems" : [], "Resolutions" : [], "Refresh Rates" : [], "Refresh Rates" : []})
-
+data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"Model Name" : [], "Supported Apps" : [],"Operating Systems" : [], "Display Size":[],"Screen Type":[], "Color":[], "Resolutions" : [], "Sound Outputs" : [], "Refresh Rates" : [],})
 
 
 #Scraping all the required features of each product
@@ -148,22 +212,32 @@ def assign_to_dataframe(product_content):
     resolutionss = get_specifications3(product_content)
     sound_outputss = get_specifications4(product_content)
     refresh_ratess = get_specifications5(product_content)
+    product_color = get_product_color(product_content)
+    product_display_size = get_display_size(product_content)
+    product_screen_type = get_screen_type(product_content)
+    product_model_name = get_model_name(product_content)
     df = pd.DataFrame({
                    "Product Name": product_names,
                     "Price": product_prices,
                     "Ratings" : product_ratings,
+                    "Model Name" : product_model_name,
                      "Supported Apps" : supported_appss,
                     "Operating Systems" : operating_systemss,
+                    "Display Size" : product_display_size,
+                    "Screen Type" : product_screen_type,
+                    "Color" : product_color,
                     "Resolutions" : resolutionss,
                     "Sound Outputs" : sound_outputss,
-                    "Refresh Rates" : refresh_ratess
+                    "Refresh Rates" : refresh_ratess,
+                    
                 })
 
     return df
 
+
 # Getting product deatails for 45 pages
 
-for page in range(1, 3):
+for page in range(1, 46):
     url = f"https://www.flipkart.com/search?q=smart+tv&sid=ckf%2Cczl&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&as-pos=1&as-type=HISTORY&suggestionId=smart+tv%7CTelevisions&requestId=ac4665a8-c1ef-462b-9fb8-e5913908cc39"
     url_contents = url_content(url)
     product_link = get_product_url(url_contents)
