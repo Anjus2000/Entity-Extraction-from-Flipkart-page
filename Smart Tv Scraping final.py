@@ -81,7 +81,7 @@ def get_operating_systems(soup):
             item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
             specifications.append(item_specifications)
     try:
-        operating_system = [spec[1] for spec in specifications]
+        operating_system = [spec[1].split(': ')[1] for spec in specifications]
     except:
         operating_system = "NO value available"
     return operating_system
@@ -89,14 +89,17 @@ def get_operating_systems(soup):
 ##Function for resolutions
 
 def get_resolutions(soup):
-    specifications=[]
-    for item in soup.find_all("div", class_="_2418kt"):
-            item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
-            specifications.append(item_specifications)
+    resolution = ""
     try:
-        resolution = [spec[2] for spec in specifications]
+        table = soup.find("div", {"class": "_3k-BhJ"})
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "hd technology & resolution":
+                resolution = cells[1].text.strip()
+                break
     except:
-        resolution = "NO value available"
+        resolution = "No value available"
     return resolution
 
 #Function for sound outputs
@@ -107,7 +110,7 @@ def get_sound_outputs(soup):
             item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
             specifications.append(item_specifications)
     try:
-        sound_output = [spec[3] for spec in specifications]
+        sound_output = [spec[3].split(': ')[1] for spec in specifications]
     except:
         sound_output = "NO value available"
     return sound_output
@@ -120,10 +123,11 @@ def get_refresh_rates(soup):
             item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
             specifications.append(item_specifications)
     try:
-        refresh_rate = [spec[4] for spec in specifications]
+        refresh_rate = [spec[4].split(': ')[1] for spec in specifications]
     except:
         refresh_rate = "NO value available"
     return refresh_rate
+
 
 #Function for product colour
 
@@ -137,6 +141,8 @@ def get_product_color(soup):
             if cells[0].text.strip().lower() == "color":
                 color = cells[1].text.strip()
                 break
+        if not color:
+            color = "No value available"
     except:
         color = "No value available"
     return color
@@ -153,6 +159,8 @@ def get_display_size(soup):
             if cells[0].text.strip().lower() == "display size":
                 display_size = cells[1].text.strip()
                 break
+        if not display_size:
+            display_size = "No value available"
     except:
         display_size = "No value available"
     return display_size
@@ -169,9 +177,12 @@ def get_screen_type(soup):
             if cells[0].text.strip().lower() == "screen type":
                 screen_type = cells[1].text.strip()
                 break
+        if not screen_type:
+            screen_type = "No value available"
     except:
          screen_type = "No value available"
     return screen_type
+
 
 
 #Function for model name
@@ -186,15 +197,127 @@ def get_model_name(soup):
             if cells[0].text.strip().lower() == "model name":
                 model_name = cells[1].text.strip()
                 break
+        if not model_name:
+            model_name = "No value available"
     except:
          model_name = "No value available"
     return model_name
 
+#Function for storage memory
+
+def get_storage_memory(soup):
+    memory = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[3]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "storage memory":
+                memory = cells[1].text.strip()
+                continue
+        if not memory:
+            memory = "No value available"
+    except:
+         memory = "No value available"
+    return memory
+
+# Function for ram storage
+
+def get_ram_storage(soup):
+    ram = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[3]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "ram capacity":
+                ram = cells[1].text.strip()
+                continue
+        if not ram:
+            ram = "No value available"
+    except:
+         ram = "No value available"
+    return ram
+
+#Function for number of scores
+
+def get_number_cores(soup):
+    cores = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[3]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "number of cores":
+                cores = cells[1].text.strip()
+                break
+        if not cores:
+            cores = "No value available"
+    except:
+         cores = "No value available"
+    return cores
+
+#Function for getting processor 
+
+def get_processor(soup):
+    processor = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[3]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "processor":
+                processor = cells[1].text.strip()
+                continue
+        if not processor:
+            processor = "No value available"
+    except:
+         processor = "No value available"
+    return processor
+
+#Function for getting system language
+
+def get_system_language(soup):
+    language = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[3]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "system languages":
+                language = cells[1].text.strip()
+                continue
+        if not language:
+            language = "No value available"
+            
+    except:
+         language = "No value available"
+    return language
+
+#Function for getting power requirements
+
+def get_power_requirement(soup):
+    power_requirement = ""
+    try:
+        table = soup.find_all("div", {"class": "_3k-BhJ"})[6]
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all("td")
+            if cells[0].text.strip().lower() == "power requirement":
+                power_requirement = cells[1].text.strip()
+                continue
+        if not power_requirement:
+             power_requirement = "No value available"
+    except:
+         power_requirement = "No value available"
+    return power_requirement
+
 
 #Creating dataframe for calculating the length of the dataframe containing the features
 
-data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"Model Name" : [], "Supported Apps" : [],"Operating Systems" : [], "Display Size":[],"Screen Type":[], "Color":[], "Resolutions" : [], "Sound Outputs" : [], "Refresh Rates" : [],})
-
+data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"Model Name" : [], "Supported Apps" : [],"Operating Systems" : [], 
+                     "Display Size":[],"Screen Type":[], "Color":[],"Storage Memory" : [],"Ram Storage" : [],"Number of Cores":[],"Processor" :[],  "Resolutions" : [],
+                     "System Language" : [],"Power Requirement" : [], "Refresh Rates":[], "Sound Output":[]})
 
 #Scraping all the required features of each product
 
@@ -203,15 +326,21 @@ def assign_to_dataframe(product_content):
     product_names = get_product_name(product_content)
     product_prices = get_product_price(product_content)
     product_ratings= get_product_ratings(product_content)
-    supported_appss = get_specifications1(product_content)
-    operating_systemss = get_specifications2(product_content)
-    resolutionss = get_specifications3(product_content)
-    sound_outputss = get_specifications4(product_content)
-    refresh_ratess = get_specifications5(product_content)
+    supported_appss = get_supported_apps(product_content)
+    operating_systemss = get_operating_systems(product_content)
+    resolutionss = get_resolutions(product_content)
+    refresh_ratess = get_refresh_rates(product_content)
     product_color = get_product_color(product_content)
     product_display_size = get_display_size(product_content)
     product_screen_type = get_screen_type(product_content)
     product_model_name = get_model_name(product_content)
+    product_storage_memory = get_storage_memory(product_content)
+    product_ram_storage = get_ram_storage(product_content)
+    product_numberof_cores = get_number_cores(product_content)
+    product_processor = get_processor(product_content)
+    system_language = get_system_language(product_content)
+    product_power_requirement = get_power_requirement(product_content)
+    product_sound_outputs = get_sound_outputs(product_content)
     df = pd.DataFrame({
                    "Product Name": product_names,
                     "Price": product_prices,
@@ -222,13 +351,21 @@ def assign_to_dataframe(product_content):
                     "Display Size" : product_display_size,
                     "Screen Type" : product_screen_type,
                     "Color" : product_color,
+                    "Storage Memory" : product_storage_memory,
+                    "Ram Storage" : product_ram_storage,
+                    "Number of Cores" : product_numberof_cores,
+                    "Processor" : product_processor,
                     "Resolutions" : resolutionss,
-                    "Sound Outputs" : sound_outputss,
+                    "System Language" : system_language,
+                    "Power Requirement" : product_power_requirement,
                     "Refresh Rates" : refresh_ratess,
+                    "Sound Output" : product_sound_outputs
+                    
                     
                 })
 
     return df
+
 
 
 # Getting product deatails for 45 pages
@@ -245,8 +382,12 @@ for page in range(1, 46):
         df1 = assign_to_dataframe(product_content)
         df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 
-df.head()
+df.head(5)
+
+# Converting the dataframe into a csv file
+
+df.to_csv('smart_tv.csv', index=False)
 
 #Converting the dataframe into a json file
 
-smart_tv_json = df.to_json(orient='records')
+df.to_json("smart_tv. json", orient='records')
