@@ -323,11 +323,11 @@ df.head(5)
 
 # Converting the dataframe into a csv file
 
-df.to_csv('smart_tv.csv', index=False)
+df.to_csv('smart_phone.csv', index=False)
 
 #Converting the dataframe into a json file
 
-df.to_json("smart_tv. json", orient='records')
+df.to_json("smart_phone. json", orient='records')
 
 
 
