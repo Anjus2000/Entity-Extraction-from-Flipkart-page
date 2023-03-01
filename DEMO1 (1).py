@@ -26,8 +26,6 @@ def get_product_url(soup):
 
 #Function to extract names of products 
 
-
-
 def get_product_name(soup):
     product_name= []
     try:
@@ -38,11 +36,7 @@ def get_product_name(soup):
         product_name.append(name)
     return product_name
 
-
-
 #Function to extract price of products 
-
-
 
 def get_product_price(soup):
     product_price = []
@@ -54,11 +48,7 @@ def get_product_price(soup):
         product_price.append(price)
     return product_price
 
-
-
 #Function to extract product_ratings of products 
-
-
 
 def get_product_ratings(soup):
     product_ratings = []
@@ -70,15 +60,7 @@ def get_product_ratings(soup):
         product_ratings.append(ratings)
     return product_ratings
 
-
-
-
-
-
-
-#Function to extract camera details of products 
-
-
+#Function to extract camera features of products 
 
 def get_camera_features(soup):
     specifications=[]
@@ -91,13 +73,7 @@ def get_camera_features(soup):
         camera_features= "NO value available"
     return camera_features
 
-
-
-
 #Function to extract battery details of products 
-
-
-
 
 def get_battery_details(soup):
     specifications=[]
@@ -110,9 +86,7 @@ def get_battery_details(soup):
         battery_details = "NO value available"
     return battery_details
 
-
 #Function to extract processor of products 
-
 
 def get_processor(soup):
     specifications=[]
@@ -125,9 +99,7 @@ def get_processor(soup):
         processor = "NO value available"
     return processor
 
-
 #Function to extract color of products 
-
 
 def get_product_color(soup):
     color = ""
@@ -145,8 +117,7 @@ def get_product_color(soup):
         color = "No value available"
     return color
 
-#Function to extract camera details of products 
-
+#Function to extract camera model_name of products 
 
 def get_model_name(soup):
     model_name = ""
@@ -166,7 +137,6 @@ def get_model_name(soup):
 
 #Function to extract display_size of products 
 
-
 def get_display_size(soup):
     display_size = ""
     try:
@@ -185,8 +155,6 @@ def get_display_size(soup):
 
 #Function to extract display_type of products 
 
-
-
 def get_display_type(soup):
     display_type = ""
     try:
@@ -203,7 +171,7 @@ def get_display_type(soup):
         display_type = "No value available"
     return display_type
 
-
+#Function to extract resolution of products 
 
 def get_resolution(soup):
     resolution = ""
@@ -221,7 +189,7 @@ def get_resolution(soup):
         resolution = "No value available"
     return resolution
 
-
+#Function to extract operating_system of products 
 
 def get_operating_system(soup):
     operating_system = ""
@@ -239,8 +207,7 @@ def get_operating_system(soup):
         operating_system = "No value available"
     return operating_system
 
-
-
+#Function to extract processor_type of products 
 
 def get_processor_type(soup):
     processor_type = ""
@@ -258,10 +225,7 @@ def get_processor_type(soup):
          processor_type = "No value available"
     return processor_type
 
-
 #Function to extract ram_size of products 
-
-
 
 def get_ram_size(soup):
     ram_size = ""
@@ -279,9 +243,7 @@ def get_ram_size(soup):
         ram_size = "No value available"
     return ram_size
 
-
-
-
+#Function to extract internal_storage of products 
 
 def get_internal_storage(soup):
     internal_storage = ""
@@ -299,6 +261,7 @@ def get_internal_storage(soup):
         internal_storage = "No value available"
     return internal_storage
 
+#Creating dataframe for calculating the length of the dataframe containing the features
 
 data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"camera_features":[],"battery_details":[],"Processor":[],"product_color":[],"model_name":[],"display_size":[],"display_type":[],"resolution":[],"operating_system":[],"processor_type":[],"ram_size":[],"internal_storage":[]})
 
@@ -342,8 +305,10 @@ def assign_to_dataframe(product_content):
         
         return df
 
+# Getting product deatails for 45 pages
+
 for page in range(1, 46):
-    url = "https://www.flipkart.com/search?q=smartphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+    url = f"https://www.flipkart.com/search?q=smart+tv&sid=ckf%2Cczl&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_ps&as-pos=1&as-type=HISTORY&suggestionId=smart+tv%7CTelevisions&requestId=ac4665a8-c1ef-462b-9fb8-e5913908cc39"
     url_contents = url_content(url)
     product_link = get_product_url(url_contents)
     data["Product_Url"] = product_link
@@ -354,6 +319,15 @@ for page in range(1, 46):
         df1 = assign_to_dataframe(product_content)
         df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 
+df.head(5)
+
+# Converting the dataframe into a csv file
+
+df.to_csv('smart_tv.csv', index=False)
+
+#Converting the dataframe into a json file
+
+df.to_json("smart_tv. json", orient='records')
 
 
 
