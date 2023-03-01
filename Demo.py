@@ -1,38 +1,28 @@
-#import required libraries
+#Importing necessary libraries
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from selenium import webdriver
 
 
-# Function to extract content from page
-
-
-driver = webdriver.Edge()
-
+#Function to extract content from page
 
 def url_content(url):
-    driver.get(url)
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'lxml')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     return soup
 
-
-
-#Function to extract urls of products 
-
+#Function for product url
 
 def get_product_url(soup):
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'html.parser')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     product_link= []
     start_link = "https://www.flipkart.com"
-    for item in soup.find_all('a',href=True, attrs={"_1fQZEK"}):
+    for item in soup.find_all('a',href=True, attrs={'class':'_1fQZEK'}):
         rest_link = item['href']
         product_link.append(start_link+rest_link)
     return product_link
-
 
 
 #Function to extract names of products 
