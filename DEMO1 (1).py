@@ -1,46 +1,28 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
-#import required libraries
+#Importing necessary libraries
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from selenium import webdriver
 
 
-
-# Function to extract content from page
-
-
-driver = webdriver.Edge()
-
+#Function to extract content from page
 
 def url_content(url):
-    driver.get(url)
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'lxml')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     return soup
 
-
-
-#Function to extract urls of products 
-
+#Function for product url
 
 def get_product_url(soup):
-    page_content = driver.page_source
-    soup = BeautifulSoup(page_content, 'html.parser')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'lxml')
     product_link= []
     start_link = "https://www.flipkart.com"
-    for item in soup.find_all('a',href=True, attrs={"_1fQZEK"}):
+    for item in soup.find_all('a',href=True, attrs={'class':'_1fQZEK'}):
         rest_link = item['href']
         product_link.append(start_link+rest_link)
     return product_link
-
-
 
 #Function to extract names of products 
 
@@ -98,16 +80,16 @@ def get_product_ratings(soup):
 
 
 
-def get_camera_details(soup):
+def get_camera_features(soup):
     specifications=[]
     for item in soup.find_all("div", class_="_2418kt"):
             item_specifications = [spec.text for spec in item.find_all("li", class_="_21Ahn-")]
             specifications.append(item_specifications)
     try:
-        camera_details = [spec[2] for spec in specifications]
+        camera_features = [spec[2] for spec in specifications]
     except:
-        camera_details= "NO value available"
-    return camera_details
+        camera_features= "NO value available"
+    return camera_features
 
 
 
@@ -318,48 +300,16 @@ def get_internal_storage(soup):
     return internal_storage
 
 
+data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"camera_features":[],"battery_details":[],"Processor":[],"product_color":[],"model_name":[],"display_size":[],"display_type":[],"resolution":[],"operating_system":[],"processor_type":[],"ram_size":[],"internal_storage":[]})
 
+#Scraping all the required features of each product
 
-#website_link
-
-
-
-url = "https://www.flipkart.com/search?q=smartphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
-
-
-
-#Creating dataframe for calculating the length of the dataframe containing the features
-
-
-
-data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"camera_details":[],"battery_details":[],"Processor":[],"product_color":[],"model_name":[],"display_size":[],"display_type":[],"resolution":[],"operating_system":[],"processor_type":[],"ram_size":[],"internal_storage":[]})
-
-
-
-url_contents=url_content(url)
-
-
-
-#Getting Each product's link
-
-
-product_links=get_product_url(url_contents)
-
-
-#Assigning the each product's link to the variaable "Product_Url" in the dataframe
-
-
-
-data["Product_Url"] = product_links
-
-
-df = pd.DataFrame()
-for page in range(1, 45):
-    def assign_to_dataframe(product_content):
+df=pd.DataFrame()
+def assign_to_dataframe(product_content):
         product_names = get_product_name(product_content)
         product_prices = get_product_price(product_content)
         product_ratings= get_product_ratings(product_content)
-        camera_detailss = get_camera_details(product_content)
+        camera_featuress = get_camera_features(product_content)
         battery_detailss = get_battery_details(product_content)
         processors= get_processor(product_content)
         product_colors=get_product_color(product_content)
@@ -375,7 +325,7 @@ for page in range(1, 45):
                "Product Name": product_names,
                 "Price": product_prices,
                 "Ratings" : product_ratings,
-                "camera_details":camera_detailss,
+                "camera_features":camera_featuress,
                 "battery_details":battery_detailss,
                 "Processor":processors,
                 "product_color":product_colors,
@@ -392,26 +342,18 @@ for page in range(1, 45):
         
         return df
 
+for page in range(1, 46):
+    url = "https://www.flipkart.com/search?q=smartphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+    url_contents = url_content(url)
+    product_link = get_product_url(url_contents)
+    data["Product_Url"] = product_link
+    
+    for product in range(len(data)):
+        product_url = data["Product_Url"].iloc[product]
+        product_content = url_content(product_url)
+        df1 = assign_to_dataframe(product_content)
+        df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
 
-
-
-
-
-
-
-
-# In[6]:
-
-
-for product in range(len(data)): 
-       product_url = data["Product_Url"].iloc[product]
-       product_content = url_content(product_url)
-       df1 = assign_to_dataframe(product_content) 
-       df = pd.concat([df, df1], axis=0, ignore_index=True, sort=False)
-df.head(5)
-
-
-# In[ ]:
 
 
 
