@@ -1,9 +1,9 @@
+#import required libraries
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
-
 
 
 # Function to extract content from page
@@ -37,8 +37,6 @@ def get_product_url(soup):
 
 #Function to extract names of products 
 
-
-
 def get_product_name(soup):
     product_name= []
     try:
@@ -49,11 +47,7 @@ def get_product_name(soup):
         product_name.append(name)
     return product_name
 
-
-
 #Function to extract price of products 
-
-
 
 def get_product_price(soup):
     product_price = []
@@ -65,11 +59,7 @@ def get_product_price(soup):
         product_price.append(price)
     return product_price
 
-
-
 #Function to extract product_ratings of products 
-
-
 
 def get_product_ratings(soup):
     product_ratings = []
@@ -81,15 +71,7 @@ def get_product_ratings(soup):
         product_ratings.append(ratings)
     return product_ratings
 
-
-
-
-
-
-
 #Function to extract camera details of products 
-
-
 
 def get_camera_details(soup):
     specifications=[]
@@ -102,13 +84,7 @@ def get_camera_details(soup):
         camera_details= "NO value available"
     return camera_details
 
-
-
-
 #Function to extract battery details of products 
-
-
-
 
 def get_battery_details(soup):
     specifications=[]
@@ -124,7 +100,6 @@ def get_battery_details(soup):
 
 #Function to extract processor of products 
 
-
 def get_processor(soup):
     specifications=[]
     for item in soup.find_all("div", class_="_2418kt"):
@@ -136,10 +111,7 @@ def get_processor(soup):
         processor = "NO value available"
     return processor
 
-
 #Function to extract color of products 
-
-
 
 def get_product_color(soup):
     color = ""
@@ -157,8 +129,7 @@ def get_product_color(soup):
         color = "No value available"
     return color
 
-#Function to extract camera details of products 
-
+#Function to extract model_name of products 
 
 def get_model_name(soup):
     model_name = ""
@@ -197,8 +168,6 @@ def get_display_size(soup):
 
 #Function to extract display_type of products 
 
-
-
 def get_display_type(soup):
     display_type = ""
     try:
@@ -216,6 +185,7 @@ def get_display_type(soup):
     return display_type
 
 
+#Function to extract resolution of products 
 
 def get_resolution(soup):
     resolution = ""
@@ -233,7 +203,7 @@ def get_resolution(soup):
         resolution = "No value available"
     return resolution
 
-
+#Function to extract operating_system of products 
 
 def get_operating_system(soup):
     operating_system = ""
@@ -251,8 +221,7 @@ def get_operating_system(soup):
         operating_system = "No value available"
     return operating_system
 
-
-
+#Function to extract processor_type of products 
 
 def get_processor_type(soup):
     processor_type = ""
@@ -273,8 +242,6 @@ def get_processor_type(soup):
 
 #Function to extract ram_size of products 
 
-
-
 def get_ram_size(soup):
     ram_size = ""
     try:
@@ -291,9 +258,7 @@ def get_ram_size(soup):
         ram_size = "No value available"
     return ram_size
 
-
-
-
+#Function to extract internal_storage of products 
 
 def get_internal_storage(soup):
     internal_storage = ""
@@ -388,15 +353,6 @@ for page in range(1, 45):
 
 
 
-
-
-
-
-
-
-# In[7]:
-
-
 for product in range(len(data)): 
        product_url = data["Product_Url"].iloc[product]
        product_content = url_content(product_url)
@@ -405,7 +361,6 @@ for product in range(len(data)):
 df.head(17)
 
 
-# In[ ]:
 
 
 
