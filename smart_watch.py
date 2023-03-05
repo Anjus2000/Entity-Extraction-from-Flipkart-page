@@ -1,8 +1,11 @@
+#Importing neccessary libraries
+
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 
+#Function for getting 
 
 def url_content(url):
     response = requests.get(url)
