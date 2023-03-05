@@ -5,13 +5,14 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 
-#Function for getting 
-
+#Function to extract content from page
+ 
 def url_content(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'lxml')
     return soup
 
+#Function for product url
 
 def get_product_url(soup):
     response = requests.get(url)
@@ -23,6 +24,7 @@ def get_product_url(soup):
         product_link.append(start_link+rest_link)
     return product_link
 
+#Function for product name
 
 def get_product_name(soup):
     product_name = []
@@ -35,6 +37,7 @@ def get_product_name(soup):
 
     return product_name
 
+#function for product price
 
 def get_product_price(soup):
     product_price = []
@@ -47,6 +50,7 @@ def get_product_price(soup):
 
     return product_price
 
+#Function for product ratings 
 
 def get_product_ratings(soup):
     product_ratings = []
@@ -59,7 +63,7 @@ def get_product_ratings(soup):
 
     return product_ratings
 
-
+#Function for product model name
 
 def get_model_name(soup):
     model_name = ""
@@ -77,6 +81,7 @@ def get_model_name(soup):
         model_name = "No value available"
     return model_name
 
+#Function for dial colour
 
 def get_dial_color(soup):
     dial_color = ""
@@ -94,6 +99,7 @@ def get_dial_color(soup):
         dial_color = "No value available"
     return dial_color
 
+#function for dial shape
 
 def get_dial_shape(soup):
     dial_shape = ""
@@ -111,6 +117,7 @@ def get_dial_shape(soup):
         dial_shape = "No value available"
     return dial_shape
 
+#Function for strap colour
 
 def get_strap_color(soup):
     strap_color = ""
@@ -128,6 +135,7 @@ def get_strap_color(soup):
          strap_color = "No value available"
     return strap_color
 
+#Function for strap material
 
 def get_strap_material(soup):
     strap_material = ""
@@ -145,6 +153,7 @@ def get_strap_material(soup):
          strap_material = "No value available"
     return strap_material
 
+#Function for size
 
 def get_size(soup):
     size = ""
@@ -162,6 +171,8 @@ def get_size(soup):
          size = "No value available"
     return size
 
+#Function for touchscreen
+
 def get_touchscreen(soup):
     touchscreen = ""
     try:
@@ -177,6 +188,8 @@ def get_touchscreen(soup):
     except:
          touchscreen = "No value available"
     return touchscreen
+
+#Function for water resistant
 
 def get_water_resistant(soup):
     water_resistant = ""
@@ -194,6 +207,7 @@ def get_water_resistant(soup):
          water_resistant = "No value available"
     return water_resistant
 
+#Function for water resistance depth
 
 def get_water_resistance_depth(soup):
     water_resistance_depth = ""
@@ -211,6 +225,7 @@ def get_water_resistance_depth(soup):
          water_resistance_depth = "No value available"
     return water_resistance_depth
 
+#Function for usage
 
 def get_usage(soup):
     usage = ""
@@ -229,6 +244,7 @@ def get_usage(soup):
         usage = "No value available"
     return usage
 
+#Function for dial material
 
 def get_dial_material(soup):
     dial_material = ""
@@ -246,6 +262,7 @@ def get_dial_material(soup):
          dial_material = "No value available"
     return dial_material
 
+#Function for ideal for (men or women)
 
 def get_ideal_for(soup):
     ideal_for = ""
@@ -263,6 +280,7 @@ def get_ideal_for(soup):
          ideal_for = "No value available"
     return ideal_for
 
+#function for compatible os
 
 def get_compatible_os(soup):
     compatible_os = ""
@@ -280,6 +298,7 @@ def get_compatible_os(soup):
          compatible_os = "No value available"
     return compatible_os
 
+# Function for sensor
 
 def get_sensor(soup):
     sensor = ""
@@ -297,6 +316,7 @@ def get_sensor(soup):
          sensor = "No value available"
     return sensor
 
+#function for compatible device
 
 def get_compatible_device(soup):
     compatible_device = ""
@@ -314,6 +334,7 @@ def get_compatible_device(soup):
          compatible_device = "No value available"
     return compatible_device
 
+#Function for notification
 
 def get_notification(soup):
     notification = ""
@@ -331,6 +352,7 @@ def get_notification(soup):
          notification = "No value available"
     return notification
 
+#Function for charge time
 
 def get_charge_time(soup):
     charge_time = ""
@@ -348,6 +370,7 @@ def get_charge_time(soup):
          charge_time = "No value available"
     return charge_time
 
+#function for battery life
 
 def get_battery_life(soup):
     battery_life = ""
@@ -365,6 +388,7 @@ def get_battery_life(soup):
          battery_life = "No value available"
     return battery_life
 
+#Function for charger type
 
 def get_charger_type(soup):
     charger_type = ""
@@ -382,6 +406,7 @@ def get_charger_type(soup):
          charger_type = "No value available"
     return charger_type
 
+#Function for display resolution
 
 def get_display_resolution(soup):
     display_resolution = ""
@@ -399,6 +424,8 @@ def get_display_resolution(soup):
          display_resolution = "No value available"
     return display_resolution
 
+#Functuion for display size
+
 def get_display_size(soup):
     display_size = ""
     try:
@@ -415,6 +442,7 @@ def get_display_size(soup):
          display_size = "No value available"
     return display_size
 
+#Function for display type
 
 def get_display_type(soup):
     display_type = ""
@@ -432,6 +460,7 @@ def get_display_type(soup):
          display_type = "No value available"
     return display_type
 
+#function for call features
 
 def get_call_features(soup):
     call_features = ""
@@ -449,11 +478,16 @@ def get_call_features(soup):
          call_features = "No value available"
     return call_features
 
+#Creating dataframe for calculating the length of the dataframe containing the features
 
-data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"Model Name"  : [], "Dial Color" : [],"Dial Shape" : [], "Strap Color":[],"Strap Material":[], "Size":[],"Touchscreen" : [],"Water Resistant" : [],"Water Resistance Depth":[],"Usage" :[],  "Dial Material" : [],"Ideal For" : [],"Compatible OS" : [], "Sensor":[],"Compatible Device":[],"Notification":[],"Charge Time":[],"Battery Life":[],"Charger Type":[],"Display Resolution":[],"Display Size":[],"Display Type":[],"Call Features":[]})
+data = pd.DataFrame({"Product_Url" : [], "Product Name" : [], "Price" : [], "Ratings" : [],"Model Name"  : [], "Dial Color" : [],"Dial Shape" : [], "Strap Color":[],
+                     "Strap Material":[], "Size":[],"Touchscreen" : [],"Water Resistant" : [],"Water Resistance Depth":[],"Usage" :[],  "Dial Material" : [],
+                     "Ideal For" : [],"Compatible OS" : [], "Sensor":[],"Compatible Device":[],"Notification":[],"Charge Time":[],"Battery Life":[],
+                     "Charger Type":[],"Display Resolution":[],"Display Size":[],"Display Type":[],"Call Features":[]})
+
+#Scraping all the required features of each product
 
 df = pd.DataFrame()
-
 
 def assign_to_dataframe(product_content):
     product_names = get_product_name(product_content)
@@ -530,7 +564,10 @@ for page in range(1, 4):
 
 df.head(5)
 
+# Converting the dataframe into a csv file
 
 df.to_csv("smart_watch.csv")
+
+# Converting the dataframe into a json file
 
 df.apply(lambda x: x.str.split(','), axis=1).to_json('smart_watch.json',orient='records')
