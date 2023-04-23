@@ -401,7 +401,6 @@ for page in range(1, 45):
 
 
 
-# In[62]:
 
 
 for product in range(len(data)): 
@@ -415,7 +414,6 @@ df.head(15)
 
 
 
-# In[ ]:
 
 
 
