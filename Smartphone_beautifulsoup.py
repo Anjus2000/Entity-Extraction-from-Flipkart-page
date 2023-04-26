@@ -1,10 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[7]:
-
-
-#Importing necessary libraries
 
 import requests
 from bs4 import BeautifulSoup
