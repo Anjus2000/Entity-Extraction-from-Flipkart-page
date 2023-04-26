@@ -357,8 +357,4 @@ final_df = pd.concat(df_list, ignore_index=True)
 final_df.to_csv("smartphone_data.csv", index=False)
 
 
-# In[ ]:
-
-
-data = pd.DataFrame(columns=["Product Name", "Price", "Ratings", "camera_details", "battery_details", "Processor", "product_color", "model_name", "display_size", "display_type", "resolution", "operating_system", "processor_type", "ram_size", "internal_storage", "Product_Url"])
 
