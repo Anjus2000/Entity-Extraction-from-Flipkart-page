@@ -189,6 +189,7 @@ def get_resolution(soup):
         resolution = "No value available"
     return resolution
 
+
 #Function to extract operating_system of products 
 
 def get_operating_system(soup):
