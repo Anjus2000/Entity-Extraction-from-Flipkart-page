@@ -295,7 +295,7 @@ for page in range(1, 45):
     # Create an empty data frame
     data = pd.DataFrame(columns=[
         
-        "Product_Url",
+       
         "ProductName",
         "Price",
         "Ratings,"
@@ -309,7 +309,8 @@ for page in range(1, 45):
         "RemoteControl",
         "DustFilter",
         "PowerConsumption",
-        "PowerRequirement"
+        "PowerRequirement",
+        "Product_Url"
        
     ])
 
