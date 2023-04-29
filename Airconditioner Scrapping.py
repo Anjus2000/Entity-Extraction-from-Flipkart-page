@@ -299,8 +299,8 @@ for page in range(1, 45):
         "ProductName",
         "Price",
         "Ratings,"
-        "Capacity, in tons"
-        "ModelName,"
+        "Capacity in tons",
+        "ModelName",
         "ProductType",
         "Brand",
         "ProductColor",
