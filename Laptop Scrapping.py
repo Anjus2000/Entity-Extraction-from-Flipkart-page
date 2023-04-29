@@ -417,7 +417,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 final_df.to_csv("Laptop.csv", index=False)
 
 
-# In[ ]:
 
 
 
