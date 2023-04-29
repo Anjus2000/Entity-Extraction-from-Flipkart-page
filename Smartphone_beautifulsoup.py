@@ -272,7 +272,7 @@ url_base = "https://www.flipkart.com/search?q=smartphone&otracker=search&otracke
 df_list = []
 
 # Scraping 
-for page in range(1, 26):
+for page in range(1, 45):
     # Define the URL for each page
     url = url_base + str(page)
     
