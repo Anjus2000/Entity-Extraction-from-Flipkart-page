@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 #importing required libraries
 
@@ -374,7 +369,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 final_df.to_csv("Airconditioner.csv", index=False)
 
 
-# In[ ]:
 
 
 
