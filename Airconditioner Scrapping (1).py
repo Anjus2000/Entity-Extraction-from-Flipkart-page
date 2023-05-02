@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
 
 #importing required libraries
 
@@ -287,7 +282,7 @@ url_base = "https://www.flipkart.com/search?q=air%20conditioner&otracker=search&
 df_list = []
 
 # Scraping 
-for page in range(1,2):
+for page in range(1,45):
     # Define the URL for each page
     url = url_base + str(page)
     
@@ -373,16 +368,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 
 # Export the data frame as a CSV file
 final_df.to_csv("Airconditioner.csv", index=False)
-
-
-# In[7]:
-
-
-final_df.head(24)
-
-
-# In[ ]:
-
 
 
 
