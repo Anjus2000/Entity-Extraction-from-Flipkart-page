@@ -217,6 +217,7 @@ def get_remote_control(soup):
     return remote_control
 
 
+
 #Function to extract dust_filter of products 
 
 def get_dust_filter(soup):
