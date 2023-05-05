@@ -60,6 +60,7 @@ def get_product_ratings(soup):
         product_ratings.append(ratings)
     return product_ratings
 
+
 #Function to extract camera features of products 
 
 def get_camera_features(soup):
@@ -98,6 +99,7 @@ def get_processor(soup):
     except:
         processor = "NO value available"
     return processor
+
 
 #Function to extract color of products 
 
