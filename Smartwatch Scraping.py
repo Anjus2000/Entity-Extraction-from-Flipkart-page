@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[12]:
-
-
 #Importing necessary libraries
 
 import requests
@@ -600,22 +594,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 final_df.to_csv("Smartwatch.csv", index=False)
 
 
-
-# In[13]:
-
-
-final_df
-
-
-# In[ ]:
-
-
-url = "https://www.flipkart.com/search?q=laptop&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
-product_links = get_product_url(url)
-print(product_links)
-
-
-# In[ ]:
 
 
 
