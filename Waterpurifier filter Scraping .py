@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 #Importing necessary libraries
 
 import requests
@@ -239,17 +233,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 
 # Export the data frame as a CSV file
 final_df.to_csv("water purifier filter.csv", index=False)
-
-
-
-# In[ ]:
-
-
-final_df
-
-
-# In[ ]:
-
 
 
 
