@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
 #Importing necessary libraries
 
 import requests
@@ -424,7 +418,6 @@ final_df = pd.concat(df_list, ignore_index=True)
 final_df.to_csv("Smarttv.csv", index=False)
 
 
-# In[ ]:
 
 
 
