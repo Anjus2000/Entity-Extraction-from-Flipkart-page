@@ -1,4 +1,4 @@
-# Entity Extraction from Flipkart's page and building a Chatbot on it #
+# Entity Extraction from Flipkart's page and building a Chatbot #
 This project is focused on extracting relevant entities such as product name, price, ratings, etc from Flipkart for differnt products.The scraped data is used for making a chatbot that can provide users with information about the product, making it easier for users to get information about products they are interested in.
 ## Requirements
 * Python
